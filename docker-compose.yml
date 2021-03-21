@@ -1,0 +1,19 @@
+services:
+  back-postgres-db:
+    container_name: back-postgres-db
+    image: postgres:alpine
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    ports:
+    - 5432:5432
+
+  back-redris-db:
+    image: redis:alpine
+    container_name: back-redis-db
+    restart: always
+    ports:
+      - 6379:6379
+
