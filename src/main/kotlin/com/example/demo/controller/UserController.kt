@@ -6,6 +6,7 @@ import com.example.demo.service.UserService
 import org.slf4j.LoggerFactory
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/user")
@@ -18,7 +19,7 @@ class UserController(private val userService: UserService) {
     }
 
     @PostMapping
-    fun createUser(@RequestBody userDto: UserDto): ResponseEntity<BaseResponse> {
+    fun createUser(@RequestBody @Valid userDto: UserDto): ResponseEntity<BaseResponse> {
         log.debug("attempt to register user: {}", userDto)
         val response = userService.registerUser(userDto)
         log.debug("registered user: {}", response)
@@ -30,8 +31,8 @@ class UserController(private val userService: UserService) {
         return BaseResponse.ok(userService.getUserById(id))
     }
 
-    @PutMapping("{id}")
-    fun updateUser(@PathVariable(name = "id") id: Long, @RequestBody userDto: UserDto): ResponseEntity<BaseResponse> {
+    @PutMapping("/{id}")
+    fun updateUser(@PathVariable(name = "id") id: Long, @RequestBody @Valid userDto: UserDto): ResponseEntity<BaseResponse> {
         log.debug("attempt to update user with id $id: {}", userDto)
         val response = userService.updateUser(id, userDto)
         log.debug("updated user: {}", response)
