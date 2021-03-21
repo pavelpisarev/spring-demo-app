@@ -9,10 +9,10 @@ data class UserEntity(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     var id: Long? = null,
 
-    @Column(name = "username", unique = true, nullable = false)
+    @Column(name = "username")
     var username: String? = null,
 
-    @Column(name = "email", unique = true, nullable = false)
+    @Column(name = "email")
     var email: String? = null,
 
     @Column(name = "password")
