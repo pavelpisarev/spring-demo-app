@@ -12,6 +12,11 @@ import org.springframework.web.bind.annotation.*
 class UserController(private val userService: UserService) {
     private val log = LoggerFactory.getLogger(javaClass)
 
+    @GetMapping
+    fun getAllUsers(): ResponseEntity<BaseResponse> {
+        return BaseResponse.ok(userService.getAllUsers())
+    }
+
     @PostMapping
     fun createUser(@RequestBody userDto: UserDto): ResponseEntity<BaseResponse> {
         log.debug("attempt to register user: {}", userDto)
